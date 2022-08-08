@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,12 +45,12 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the customer associated with the User
+     * Get all of the customers for the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function customer(): HasOne
+    public function customers(): HasMany
     {
-        return $this->hasOne(Customer::class);
+        return $this->hasMany(Customer::class);
     }
 }
