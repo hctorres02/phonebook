@@ -3,6 +3,12 @@
         <nav class="navbar navbar-dark bg-primary shadow-sm mb-4">
             <div class="container">
                 <Link href="/" class="navbar-brand">Customer Service</Link>
+
+                <div class="navbar-nav">
+                    <li class="nav-item">
+                        <Link href="/logout" class="nav-link">Desconectar</Link>
+                    </li>
+                </div>
             </div>
         </nav>
         <main class="container">
@@ -11,7 +17,7 @@
                     <ul class="list-group">
                         <p>
                             <Link href="/users">Usuários</Link>
-                        </li>
+                        </p>
                         <p>
                             <Link href="/customers">Clientes</Link>
                         </p>
@@ -31,9 +37,9 @@
     import { Link } from "@inertiajs/inertia-vue";
 
     export default {
-        name: 'AuthLayout',
+        name: "AuthLayout",
         components: {
-            Link,
+            Link
         }
     };
 </script>

@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/home');
+
 Route::group(['prefix' => 'login', 'middleware' => 'guest'], function () {
     Route::get('/', [LoginController::class, 'create'])->name('login');
     Route::post('/', [LoginController::class, 'store'])->name('login.store');
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+    Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 
     // visão geral
     Route::get('/home', DashboardController::class)->name('dashboard');
