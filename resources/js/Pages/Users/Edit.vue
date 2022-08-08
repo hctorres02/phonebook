@@ -1,6 +1,6 @@
 <template>
     <auth-layout>
-        <user-form :user="user" :errors="errors">Editar usuário</user-form>
+        <user-form :user="user" title="Editar usuário" caption="Salvar alterações" />
     </auth-layout>
 </template>
 
@@ -15,8 +15,7 @@
             UserForm
         },
         props: {
-            user: Object,
-            errors: Object
+            user: Object
         }
     };
 </script>

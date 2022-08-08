@@ -17,7 +17,10 @@
                     <tr v-for="user in users.data" :key="user.id">
                         <td>{{ user.id }}</td>
                         <td>
-                            <Link :href="`/users/${user.id}/edit`">{{ user.name }}</Link>
+                            <Link :href="`/users/${user.id}`">
+                                <span v-if="user.id == currentUser.id" class="badge badge-warning">Você</span>
+                                {{ user.name }}
+                            </Link>
                         </td>
                         <td>{{ user.email }}</td>
                     </tr>
@@ -40,6 +43,11 @@
         },
         props: {
             users: Array
+        },
+        computed: {
+            currentUser() {
+                return this.$page.props.auth.user;
+            }
         }
     };
 </script>

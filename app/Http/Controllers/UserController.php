@@ -51,4 +51,15 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user)->with('success', 'Usuário atualizado!');
     }
+
+    public function destroy(User $user)
+    {
+        if($user->is(auth()->user())) {
+            return redirect()->route('users.index')->with('error', 'Não é possível excluír seu próprio usuário!');
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'Usuário excluido!');
+    }
 }
