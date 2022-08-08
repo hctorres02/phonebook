@@ -12,13 +12,19 @@ final class CustomerStatus
 
     public const STATUS_CANCELLED = 127;
 
-    public static function toArray(): array
+    public static function toArray($onlyKeys = true): array
     {
-        return [
-            self::STATUS_NEW,
-            self::STATUS_ACTIVE,
-            self::STATUS_SUSPENDED,
-            self::STATUS_CANCELLED,
+        $map = [
+            self::STATUS_NEW => 'Novo',
+            self::STATUS_ACTIVE => 'Ativo',
+            self::STATUS_SUSPENDED => 'Suspenso',
+            self::STATUS_CANCELLED => 'Cancelado',
         ];
+
+        if ($onlyKeys) {
+            return array_keys($map);
+        }
+
+        return $map;
     }
 }
