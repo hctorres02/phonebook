@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-dark bg-primary shadow-sm mb-4">
+        <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm mb-4">
             <div class="container">
                 <Link href="/" class="navbar-brand">Customer Service</Link>
 
@@ -21,11 +21,24 @@
                         <p>
                             <Link href="/customers">Clientes</Link>
                         </p>
+                        <p>
+                            <Link href="/numbers">Catálogo telefônico</Link>
+                        </p>
                     </ul>
                 </aside>
                 <main class="col-9">
-                    <div class="border rounded bg-white p-4 shadow-sm">
-                        <slot />
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <h4 v-if="title" class="mb-0 pb-0 pt-2 font-weight-bold">{{ title }}</h4>
+                                <div>
+                                    <slot name="buttons" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <slot />
+                        </div>
                     </div>
                 </main>
             </div>
@@ -38,6 +51,10 @@
 
     export default {
         name: "AuthLayout",
+        props: {
+            title: String,
+            backTo: String
+        },
         components: {
             Link
         }

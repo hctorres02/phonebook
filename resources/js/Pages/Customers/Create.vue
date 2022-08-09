@@ -1,9 +1,8 @@
 <template>
-    <auth-layout>
+    <auth-layout title="Cadastrar cliente" back-to="/customers">
         <customer-form
             method="post"
             action="/customers"
-            title="Cadastrar cliente"
             caption="Salvar"
             :statuses="statuses"
             :default-status="defaultStatus"

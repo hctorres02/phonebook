@@ -1,15 +1,7 @@
 <template>
     <auth-layout title="Editar número" :back-to="`/numbers/${number.id}`">
         <template #buttons>
-            <Link
-                :href="`/numbers/${number.id}`"
-                method="delete"
-                as="button"
-                class="btn btn-danger"
-            >
-                <i class="bi bi-trash"></i>
-                Excluír número
-            </Link>
+            <LinkDestroy :href="`/numbers/${number.id}`" label="Excluír número" />
         </template>
         <number-form
             :action="`/numbers/${number.id}`"
@@ -25,9 +17,9 @@
 </template>
 
 <script>
-    import { Link } from "@inertiajs/inertia-vue";
     import AuthLayout from "@/Layouts/Auth";
     import NumberForm from "@/Pages/Numbers/Form";
+    import LinkDestroy from "@/CommonParts/LinkDestroy";
 
     export default {
         name: "EditNumber",
@@ -39,9 +31,9 @@
             number: Object
         },
         components: {
-            Link,
             AuthLayout,
-            NumberForm
+            NumberForm,
+            LinkDestroy
         }
     };
 </script>

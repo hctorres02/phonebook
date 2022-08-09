@@ -1,9 +1,11 @@
 <template>
-    <auth-layout>
-        <h4 class="border-bottom mb-4 pb-2">Clientes</h4>
-        <p>
-            <Link href="/customers/create">Cadastrar cliente</Link>
-        </p>
+    <auth-layout title="Clientes">
+        <template #buttons>
+            <Link href="/customers/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>
+                Cadastrar cliente
+            </Link>
+        </template>
         <div v-if="customers.data" class="table-responsive">
             <table class="table table-borderless table-hover">
                 <thead>

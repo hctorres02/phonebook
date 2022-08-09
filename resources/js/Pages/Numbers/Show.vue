@@ -5,15 +5,7 @@
                 <i class="bi bi-pencil"></i>
                 Editar número
             </Link>
-            <Link
-                :href="`/numbers/${number.id}`"
-                method="delete"
-                as="button"
-                class="btn btn-danger"
-            >
-                <i class="bi bi-trash"></i>
-                Excluír número
-            </Link>
+            <LinkDestroy :href="`/numbers/${number.id}`" label="Excluír número" />
         </template>
         <div class="form-row">
             <div class="col-md-3 col font-weight-bold">Cliente</div>
@@ -31,10 +23,12 @@
 <script>
     import { Link } from "@inertiajs/inertia-vue";
     import AuthLayout from "@/Layouts/Auth";
+    import LinkDestroy from "@/CommonParts/LinkDestroy";
 
     export default {
         components: {
             Link,
+            LinkDestroy,
             AuthLayout
         },
         props: {

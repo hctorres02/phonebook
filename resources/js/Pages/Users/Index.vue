@@ -1,9 +1,11 @@
 <template>
-    <auth-layout>
-        <h4 class="border-bottom mb-4 pb-2">Usuários</h4>
-        <p>
-            <Link href="/users/create">Cadastrar usuário</Link>
-        </p>
+    <auth-layout title="Usuários">
+        <template #buttons>
+            <Link href="/users/create" class="btn btn-primary">
+                <i class="bi bi-person-plus"></i>
+                Cadastrar usuário
+            </Link>
+        </template>
         <div v-if="users.data" class="table-responsive">
             <table class="table table-borderless table-hover">
                 <thead>

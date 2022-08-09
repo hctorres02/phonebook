@@ -1,14 +1,9 @@
 <template>
-    <auth-layout>
-        <h4 class="border-bottom mb-4 pb-2">Dashboard</h4>
+    <auth-layout title="Dashboard">
         <div class="row row-cols-3">
-            <div v-for="(element, key) in indicadores" :key="key" class="col">
-                <div class="card">
-                    <div class="card-header">{{ element.name }}</div>
-                    <div class="card-body">
-                        <h2>{{ element.amount }}</h2>
-                    </div>
-                </div>
+            <div v-for="(element, key) in indicadores" :key="key" class="col text-center">
+                <h1>{{ element.amount }}</h1>
+                <h5>{{ element.name }}</h5>
             </div>
         </div>
     </auth-layout>

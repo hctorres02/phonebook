@@ -1,9 +1,11 @@
 <template>
-    <auth-layout>
+    <auth-layout title="Editar cliente" :back-to="`/customers/${customer.id}`">
+        <template #buttons>
+            <LinkDestroy :href="`/customers/${customer.id}`" label="Excluír cliente" />
+        </template>
         <customer-form
             method="put"
             :action="`/customers/${customer.id}`"
-            title="Editar cliente"
             caption="Salvar alterações"
             :statuses="statuses"
             :customer="customer"
@@ -14,16 +16,18 @@
 <script>
     import AuthLayout from "@/Layouts/Auth";
     import CustomerForm from "@/Pages/Customers/Form";
+    import LinkDestroy from "@/CommonParts/LinkDestroy";
 
     export default {
         name: "EditCustomer",
         components: {
             AuthLayout,
-            CustomerForm
+            CustomerForm,
+            LinkDestroy
         },
         props: {
             statuses: Object,
-            customer: Object,
+            customer: Object
         }
     };
 </script>
