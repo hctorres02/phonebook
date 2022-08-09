@@ -26,7 +26,6 @@ mix.webpackConfig({
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .css('resources/css/bootstrap.min.css', 'public/css')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
