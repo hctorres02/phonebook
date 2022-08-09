@@ -22,7 +22,7 @@
         },
         props: {
             statuses: Object,
-            defaultStatus: Number
+            defaultStatus: Number | String
         }
     };
 </script>

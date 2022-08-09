@@ -7,7 +7,12 @@
                 label="Excluír usuário"
             />
         </template>
-        <user-form :user="user" caption="Salvar alterações" />
+        <user-form
+            :action="`/users/${user.id}`"
+            method="put"
+            caption="Salvar alterações"
+            :user="user"
+        />
     </auth-layout>
 </template>
 

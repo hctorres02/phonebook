@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="form.submit(method, action)">
+    <generic-form :action="action" :method="method" :caption="caption" :form="form">
         <div class="form-row">
             <div class="form-group col">
                 <label for="customer_id">Cliente</label>
@@ -32,21 +32,20 @@
                 <small v-if="form.errors.status" class="text-danger">{{ form.errors.status }}</small>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <button class="btn btn-primary">{{ caption }}</button>
-            </div>
-        </div>
-    </form>
+    </generic-form>
 </template>
 
 <script>
+    import GenericForm from "@/CommonParts/GenericForm";
+
     export default {
         name: "NumberForm",
+        components: {
+            GenericForm
+        },
         props: {
             action: String,
             method: String,
-            title: String,
             caption: String,
             number: {
                 type: Object,

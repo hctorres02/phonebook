@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="form.submit(method, action)">
+    <generic-form :method="method" :action="action" :caption="caption" :form="form">
         <div class="form-row">
             <div class="form-group col">
                 <label for="name">Nome</label>
@@ -19,10 +19,7 @@
                     maxlength="12"
                     required
                 />
-                <small
-                    v-if="form.errors.document"
-                    class="text-danger"
-                >{{ form.errors.document }}</small>
+                <small v-if="form.errors.document" class="text-danger">{{ form.errors.document }}</small>
             </div>
             <div class="form-group col-md-4">
                 <label for="status">Situação</label>
@@ -36,32 +33,23 @@
                 <small v-if="form.errors.status" class="text-danger">{{ form.errors.status }}</small>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <button class="btn btn-primary">{{ caption }}</button>
-            </div>
-        </div>
-    </form>
+    </generic-form>
 </template>
 
 <script>
-    import { Link } from "@inertiajs/inertia-vue";
+    import GenericForm from "@/CommonParts/GenericForm";
 
     export default {
         name: "CustomerForm",
         components: {
-            Link
+            GenericForm
         },
         props: {
-            title: String,
             caption: String,
             action: String,
             method: String,
             statuses: Object,
-            defaultStatus: {
-                type: Number,
-                default: 1,
-            },
+            defaultStatus: Number | String,
             customer: {
                 type: Object,
                 default() {

@@ -1,6 +1,6 @@
 <template>
     <auth-layout title="Cadastrar usuário" back-to="/users">
-        <user-form action="/users" caption="Salvar" />
+        <user-form action="/users" method="post" caption="Salvar" />
     </auth-layout>
 </template>
 

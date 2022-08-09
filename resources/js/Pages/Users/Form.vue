@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="form.submit(method, action)">
+    <generic-form :action="action" :method="method" :caption="caption" :form="form">
         <div class="form-row">
             <div class="form-group col">
                 <label for="name">Nome</label>
@@ -14,30 +14,25 @@
                 <small v-if="form.errors.email" class="text-danger">{{ form.errors.email }}</small>
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <button class="btn btn-primary">{{ caption }}</button>
-            </div>
-        </div>
-    </form>
+    </generic-form>
 </template>
 
 <script>
-    import { Link } from "@inertiajs/inertia-vue";
+    import GenericForm from "@/CommonParts/GenericForm";
 
     export default {
         name: "UserForm",
         components: {
-            Link
+            GenericForm
         },
         props: {
-            title: String,
+            action: String,
+            method: String,
             caption: String,
             user: {
                 type: Object,
                 default() {
                     return {
-                        id: null,
                         name: null,
                         email: null
                     };
@@ -46,15 +41,8 @@
         },
         data() {
             return {
-                form: this.$inertia.form(this.user),
-                action: this.user.id ? `/users/${this.user.id}` : "/users",
-                method: this.user.id ? "put" : "post"
+                form: this.$inertia.form(this.user)
             };
-        },
-        computed: {
-            currentUser() {
-                return this.$page.props.auth.user;
-            }
         }
     };
 </script>
