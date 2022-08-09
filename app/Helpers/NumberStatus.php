@@ -10,12 +10,23 @@ final class NumberStatus
 
     public const STATUS_CANCELLED = 127;
 
-    public static function toArray(): array
+    public static function toArray($onlyKeys = true): array
     {
-        return [
-            self::STATUS_ACTIVE,
-            self::STATUS_INACTIVE,
-            self::STATUS_CANCELLED,
+        $map = [
+            self::STATUS_ACTIVE => 'Ativo',
+            self::STATUS_INACTIVE => 'Inativo',
+            self::STATUS_CANCELLED => 'Cancelado',
         ];
+
+        if ($onlyKeys) {
+            return array_keys($map);
+        }
+
+        return $map;
+    }
+
+    public static function getLabel(int $status): string
+    {
+        return self::toArray(false)[$status];
     }
 }

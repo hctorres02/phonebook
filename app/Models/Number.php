@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\NumberStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,10 @@ class Number extends Model
         'status',
     ];
 
+    protected $appends = [
+        'statusLabel',
+    ];
+
     /**
      * Get the customer that owns the Number
      *
@@ -24,5 +29,10 @@ class Number extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        return NumberStatus::getLabel($this->status);
     }
 }
