@@ -32,6 +32,34 @@
                 <small v-if="form.errors.status" class="text-danger">{{ form.errors.status }}</small>
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Preferences</label>
+                <ul class="list-group">
+                    <li
+                        v-for="(preference, name) in preferences"
+                        :key="name"
+                        class="list-group-item"
+                    >
+                        <div class="custom-control custom-checkbox">
+                            <input
+                                v-model="form.preferences"
+                                type="checkbox"
+                                :id="name"
+                                :value="name"
+                                class="custom-control-input"
+                            />
+                            <label :for="name" class="custom-control-label">
+                                {{ preference.label }}
+                                <span
+                                    class="d-block text-muted"
+                                >{{ preference.description }}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </generic-form>
 </template>
 
@@ -47,28 +75,14 @@
             action: String,
             method: String,
             caption: String,
-            number: {
-                type: Object,
-                default() {
-                    return {
-                        customer_id: null,
-                        number: null,
-                        status: null
-                    };
-                }
-            },
+            number: Object,
             customers: Object,
-            defaultCustomer: Number | String,
             statuses: Object,
-            defaultStatus: Number | String
+            preferences: Object
         },
         data() {
             return {
-                form: this.$inertia.form({
-                    ...this.number,
-                    customer_id: this.number.customer_id || this.defaultCustomer,
-                    status: this.number.status || this.defaultStatus
-                })
+                form: this.$inertia.form(this.number)
             };
         }
     };

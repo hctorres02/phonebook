@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Helpers\NumberStatus;
+use App\Helpers\Preference;
 use Illuminate\Foundation\Http\FormRequest;
 
 class NumberRequest extends FormRequest
@@ -17,6 +18,13 @@ class NumberRequest extends FormRequest
         return auth()->check();
     }
 
+    public function prepareForUpdate()
+    {
+        $this->mergeIfMissing([
+            'preferences' => [],
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,6 +33,7 @@ class NumberRequest extends FormRequest
     public function rules()
     {
         $statuses = join(',', NumberStatus::toArray());
+        $preferences = join(',', Preference::toArray());
 
         return [
             'customer_id' => [
@@ -38,6 +47,12 @@ class NumberRequest extends FormRequest
             'status' => [
                 'required',
                 "in:{$statuses}",
+            ],
+            'preferences' => [
+                'array',
+            ],
+            'preferences.*' => [
+                "in:{$preferences}",
             ],
         ];
     }

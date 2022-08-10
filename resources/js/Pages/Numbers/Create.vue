@@ -5,9 +5,9 @@
             method="post"
             caption="Salvar"
             :customers="customers"
-            :defaultCustomer="defaultCustomer"
             :statuses="statuses"
-            :defaultStatus="defaultStatus"
+            :preferences="preferences"
+            :number="number"
         />
     </auth-layout>
 </template>
@@ -19,9 +19,9 @@
     export default {
         props: {
             customers: Object,
-            defaultCustomer: Number | String,
             statuses: Object,
-            defaultStatus: Number | String
+            preferences: Object,
+            number: Object
         },
         components: {
             AuthLayout,

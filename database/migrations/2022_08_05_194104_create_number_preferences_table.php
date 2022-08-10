@@ -20,6 +20,7 @@ class CreateNumberPreferencesTable extends Migration
             $table->string('name');
             $table->string('value');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

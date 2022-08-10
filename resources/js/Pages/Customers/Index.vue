@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th style="width: 46px">#</th>
-                        <th>Nome</th>
+                        <th colspan="2">Nome</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +19,9 @@
                         <td>{{ customer.id }}</td>
                         <td>
                             <Link :href="`/customers/${customer.id}`">{{ customer.name }}</Link>
+                        </td>
+                        <td class="text-right">
+                            <Link :href="`/numbers/create?customer_id=${customer.id}`">Cadastrar número</Link>
                         </td>
                     </tr>
                 </tbody>

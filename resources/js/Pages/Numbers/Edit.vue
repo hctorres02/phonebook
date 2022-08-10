@@ -8,8 +8,9 @@
             method="put"
             caption="Salvar alterações"
             :customers="customers"
-            :defaultCustomer="defaultCustomer"
             :statuses="statuses"
+            :preferences="preferences"
+            :defaultCustomer="defaultCustomer"
             :defaultStatus="defaultStatus"
             :number="number"
         />
@@ -27,6 +28,7 @@
             customers: Object,
             defaultCustomer: Number | String,
             statuses: Object,
+            preferences: Object,
             defaultStatus: Number | String,
             number: Object
         },

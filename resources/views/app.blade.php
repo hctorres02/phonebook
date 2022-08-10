@@ -11,7 +11,7 @@
     @inertiaHead
 </head>
 
-<body class="bg-light">
+<body class="bg-light pb-4">
     @inertia
 </body>
 
