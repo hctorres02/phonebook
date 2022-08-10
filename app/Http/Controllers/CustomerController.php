@@ -35,6 +35,8 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
+        $customer->load('numbers');
+
         return inertia('Customers/Show', compact('customer'));
     }
 

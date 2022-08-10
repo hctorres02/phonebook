@@ -6,42 +6,39 @@
                 Cadastrar usuário
             </Link>
         </template>
-        <div v-if="users.data" class="table-responsive">
-            <table class="table table-borderless table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 46px">#</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="user in users.data" :key="user.id">
-                        <td>{{ user.id }}</td>
-                        <td>
-                            <Link :href="`/users/${user.id}`">
-                                <span v-if="user.id == currentUser.id" class="badge badge-warning">Você</span>
-                                {{ user.name }}
-                            </Link>
-                        </td>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div v-else class="text-center">Não há dados.</div>
+        <generic-table :source="users">
+            <template #thead>
+                <tr>
+                    <th style="width: 46px">#</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                </tr>
+            </template>
+            <tr v-for="user in users.data" :key="user.id">
+                <td>{{ user.id }}</td>
+                <td>
+                    <Link :href="`/users/${user.id}`">
+                        <span v-if="user.id == currentUser.id" class="badge badge-warning">Você</span>
+                        {{ user.name }}
+                    </Link>
+                </td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </generic-table>
     </auth-layout>
 </template>
 
 <script>
     import { Link } from "@inertiajs/inertia-vue";
     import AuthLayout from "@/Layouts/Auth";
+    import GenericTable from "@/CommonParts/GenericTable";
 
     export default {
         name: "IndexUsers",
         components: {
             Link,
-            AuthLayout
+            AuthLayout,
+            GenericTable
         },
         props: {
             users: Array
