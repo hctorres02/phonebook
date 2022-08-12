@@ -15,15 +15,15 @@
             <div class="row">
                 <aside class="col-3">
                     <ul class="list-group">
-                        <p>
+                        <li class="list-group-item">
                             <Link href="/users">Usuários</Link>
-                        </p>
-                        <p>
+                        </li>
+                        <li class="list-group-item">
                             <Link href="/customers">Clientes</Link>
-                        </p>
-                        <p>
+                        </li>
+                        <li class="list-group-item">
                             <Link href="/numbers">Catálogo telefônico</Link>
-                        </p>
+                        </li>
                     </ul>
                 </aside>
                 <main class="col-9">
