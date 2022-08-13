@@ -32,15 +32,7 @@
         },
         props: {
             user: Object,
-            roles: Array
-        },
-        computed: {
-            currentUser() {
-                return this.$page.props.auth.user;
-            }
+            roles: Object
         }
     };
 </script>
-
-<style>
-</style>

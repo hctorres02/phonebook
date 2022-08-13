@@ -40,14 +40,6 @@
         },
         props: {
             customers: Object
-        },
-        computed: {
-            currentUser() {
-                return this.$page.props.auth.user;
-            }
         }
     };
 </script>
-
-<style>
-</style>

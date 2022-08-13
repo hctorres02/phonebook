@@ -31,14 +31,6 @@
             AuthLayout,
             Link,
             LinkDestroy
-        },
-        computed: {
-            currentUser() {
-                return this.$page.props.auth.user;
-            }
         }
     };
 </script>
-
-<style>
-</style>

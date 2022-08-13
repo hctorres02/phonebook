@@ -12,7 +12,7 @@
         name: "CreateUser",
         props: {
             user: Object,
-            roles: Array
+            roles: Object
         },
         components: {
             AuthLayout,

@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return (bool) $this->role->is_admin;
+    }
+
+    public function getPermissionsAttribute(): array
+    {
+        return $this->role->permissions()->pluck('name')->all();
+    }
 }
