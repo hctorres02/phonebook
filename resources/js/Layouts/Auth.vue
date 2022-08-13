@@ -14,14 +14,22 @@
         <main class="container">
             <div class="row">
                 <aside class="col-3">
-                    <ul class="list-group">
-                        <li class="list-group-item">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent">
+                            <Link href="/permissions">Permissões</Link>
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                            <Link href="/roles">Perfis</Link>
+                        </li>
+                        <li class="list-group-item bg-transparent">
                             <Link href="/users">Usuários</Link>
                         </li>
-                        <li class="list-group-item">
+                    </ul>
+                    <ul class="list-group list-group-flush mt-4">
+                        <li class="list-group-item bg-transparent">
                             <Link href="/customers">Clientes</Link>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                             <Link href="/numbers">Catálogo telefônico</Link>
                         </li>
                     </ul>
