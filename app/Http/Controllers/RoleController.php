@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Acl\RoleRequest;
+use App\Models\Acl\Permission;
 use App\Models\Acl\Role;
 
 class RoleController extends Controller
@@ -21,6 +22,7 @@ class RoleController extends Controller
             'name' => null,
             'description' => null,
             'is_admin' => false,
+            'permissions_ids' => [],
         ]);
 
         return inertia('Acl/Roles/Create', $props);
@@ -28,7 +30,8 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request)
     {
-        Role::create($request->validated());
+        $role = Role::create($request->validated());
+        $role->permissions()->attach($request->permissions_ids);
 
         return redirect()->route('roles.index')->with('success', 'Perfil cadastrado!');
     }
@@ -48,6 +51,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $role->update($request->validated());
+        $role->permissions()->sync($request->permissions_ids);
 
         return redirect()->route('roles.index')->with('success', 'Perfil atualizado!');
     }
@@ -64,6 +68,14 @@ class RoleController extends Controller
      */
     private function sharedProps($role)
     {
-        return compact('role');
+        $permissions = Permission::where('enabled', true)->get([
+            'id', 'name', 'description'
+        ])->all();
+
+        if (!is_array($role)) {
+            $role->permissions_ids = $role->permissions()->pluck('id')->all();
+        }
+
+        return compact('role', 'permissions');
     }
 }

@@ -19,6 +19,10 @@
                 <td>
                     <Link :href="`/users/${user.id}`">
                         <span v-if="user.id == currentUser.id" class="badge badge-warning">Você</span>
+                        <small
+                            v-if="user.role.is_admin"
+                            class="badge badge-pill badge-success"
+                        >super user</small>
                         {{ user.name }}
                     </Link>
                 </td>
@@ -41,7 +45,7 @@
             GenericTable
         },
         props: {
-            users: Array
+            users: Object
         },
         computed: {
             currentUser() {

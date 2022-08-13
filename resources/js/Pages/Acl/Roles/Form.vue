@@ -30,6 +30,34 @@
                 >{{ form.errors.description }}</small>
             </div>
         </div>
+        <div v-if="!role.is_admin" class="form-row">
+            <div class="form-group col">
+                <label>Permissões</label>
+                <ul class="list-group">
+                    <li
+                        v-for="permission in permissions"
+                        :key="permission.id"
+                        class="list-group-item"
+                    >
+                        <div class="custom-control custom-checkbox">
+                            <input
+                                v-model="form.permissions_ids"
+                                type="checkbox"
+                                :id="permission.name"
+                                :value="permission.id"
+                                class="custom-control-input"
+                            />
+                            <label :for="permission.name" class="custom-control-label">
+                                {{ permission.name }}
+                                <span
+                                    class="d-block text-muted"
+                                >{{ permission.description }}</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </generic-form>
 </template>
 
@@ -46,6 +74,7 @@
             method: String,
             caption: String,
             role: Object,
+            permissions: Array
         },
         data() {
             return {

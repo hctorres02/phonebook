@@ -8,6 +8,7 @@
             :action="`/roles/${role.id}`"
             caption="Salvar alterações"
             :role="role"
+            :permissions="permissions"
         />
     </auth-layout>
 </template>
@@ -21,6 +22,7 @@
         name: "EditRole",
         props: {
             role: Object,
+            permissions: Array
         },
         components: {
             AuthLayout,

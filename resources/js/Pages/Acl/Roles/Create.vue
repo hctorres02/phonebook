@@ -5,6 +5,7 @@
             method="post"
             caption="Salvar"
             :role="role"
+            :permissions="permissions"
         />
     </auth-layout>
 </template>
@@ -17,6 +18,7 @@
         name: "CreateRole",
         props: {
             role: Object,
+            permissions: Array,
         },
         components: {
             AuthLayout,

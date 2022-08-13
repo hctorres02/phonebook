@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Acl\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -10,14 +11,29 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::query()->paginate();
+        $currentUser = auth()->user();
+        $query = User::query()->with('role');
+
+        if (!$currentUser->role->is_admin) {
+            $query->whereHas('role', function ($role) {
+                return $role->where('is_admin', false);
+            });
+        }
+
+        $users = $query->paginate();
 
         return inertia('Users/Index', compact('users'));
     }
 
     public function create()
     {
-        return inertia('Users/Create');
+        $props = $this->sharedProps([
+            'name' => null,
+            'email' => null,
+            'role_id' => null,
+        ]);
+
+        return inertia('Users/Create', $props);
     }
 
     public function store(UserRequest $request)
@@ -42,7 +58,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return inertia('Users/Edit', compact('user'));
+        $props = $this->sharedProps($user);
+
+        return inertia('Users/Edit', $props);
     }
 
     public function update(UserRequest $request, User $user)
@@ -54,12 +72,23 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if($user->is(auth()->user())) {
+        if ($user->is(auth()->user())) {
             return redirect()->route('users.index')->with('error', 'Não é possível excluír seu próprio usuário!');
         }
 
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Usuário excluido!');
+    }
+
+    /**
+     * @param \App\Models\User|array $user
+     * @return void
+     */
+    private function sharedProps($user)
+    {
+        $roles = Role::query()->pluck('name', 'id')->all();
+
+        return compact('user', 'roles');
     }
 }

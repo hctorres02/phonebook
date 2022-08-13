@@ -12,6 +12,7 @@
             method="put"
             caption="Salvar alterações"
             :user="user"
+            :roles="roles"
         />
     </auth-layout>
 </template>
@@ -30,7 +31,8 @@
             UserForm
         },
         props: {
-            user: Object
+            user: Object,
+            roles: Array
         },
         computed: {
             currentUser() {

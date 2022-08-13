@@ -31,9 +31,11 @@ class UserRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users')->where(function ($query) {
-                    return $query->where('id', '<>', $this->id);
-                })
+                "unique:users,email,{$this->id},id",
+            ],
+            'role_id' => [
+                'required',
+                'exists:roles,id',
             ],
         ];
     }

@@ -16,6 +16,13 @@ class RoleRequest extends FormRequest
         return auth()->check();
     }
 
+    public function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'permissions' => [],
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -34,6 +41,12 @@ class RoleRequest extends FormRequest
                 'nullable',
                 'max:255',
             ],
+            'permissions_ids' => [
+                'array',
+            ],
+            'permissions_ids.*' => [
+                'exists:permissions,id',
+            ]
         ];
     }
 }
