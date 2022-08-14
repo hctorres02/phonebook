@@ -27,20 +27,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function (User $user) {
+           return $user->is_admin ?: null;
+        });
+
         Permission::query()->get([
             'name',
             'enabled',
         ])->each(function (Permission $permission) {
             Gate::define($permission->name, function (User $user) use ($permission) {
-                if ($user->role->is_admin) {
-                    return true;
-                }
-
-                if ($permission->enabled) {
-                    return $user->role->permissions->contains('name', $permission->name);
-                }
-
-                return false;
+                return $permission->enabled
+                    && in_array($permission->name, $user->permissions);
             });
         });
     }

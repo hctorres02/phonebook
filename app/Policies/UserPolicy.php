@@ -10,13 +10,6 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        if ($user->is_admin) {
-            return true;
-        }
-    }
-
     public function viewAny(User $user)
     {
         return $user->can('users_view');
