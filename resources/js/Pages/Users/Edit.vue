@@ -2,7 +2,7 @@
     <auth-layout title="Editar usuário" :back-to="`/users/${user.id}`">
         <template #buttons>
             <LinkDestroy
-                v-if="user.id != currentUser.id"
+                v-if="can('users_destroy') && user.id != currentUser.id"
                 :href="`/users/${user.id}`"
                 label="Excluír usuário"
             />

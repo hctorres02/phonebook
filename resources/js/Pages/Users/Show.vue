@@ -6,7 +6,7 @@
                 Editar usuário
             </Link>
             <LinkDestroy
-                v-if="user.id != currentUser.id"
+                v-if="can('users_destroy') && user.id != currentUser.id"
                 :href="`/users/${user.id}`"
                 label="Excluír usuário"
             />

@@ -9,16 +9,19 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function index()
     {
         $currentUser = auth()->user();
-        $query = User::query()->with('role');
-
-        if (!$currentUser->role->is_admin) {
+        $query = User::query()->with('role')->when(!$currentUser->is_admin, function ($query) {
             $query->whereHas('role', function ($role) {
                 return $role->where('is_admin', false);
             });
-        }
+        });
 
         $users = $query->paginate();
 
@@ -72,10 +75,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->is(auth()->user())) {
-            return redirect()->route('users.index')->with('error', 'Não é possível excluír seu próprio usuário!');
-        }
-
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Usuário excluido!');
@@ -87,7 +86,13 @@ class UserController extends Controller
      */
     private function sharedProps($user)
     {
-        $roles = Role::query()->pluck('name', 'id')->all();
+        $roles = Role::query()->when(!auth()->user()->is_admin, function ($query) {
+            return $query->where('is_admin', false);
+        })->pluck('name', 'id')->all();
+
+        if ($user instanceof User) {
+            $user = $user->only('id', 'name', 'email', 'role_id');
+        }
 
         return compact('user', 'roles');
     }

@@ -2,8 +2,7 @@
     <div>
         <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm mb-4">
             <div class="container">
-                <Link href="/" class="navbar-brand">Customer Service</Link>
-
+                <Link href="/home" class="navbar-brand">Customer Service</Link>
                 <div class="navbar-nav">
                     <li class="nav-item">
                         <Link href="/logout" class="nav-link">Desconectar</Link>
@@ -22,7 +21,8 @@
                             <Link href="/roles">Perfis</Link>
                         </li>
                         <li class="list-group-item bg-transparent">
-                            <Link href="/users">Usuários</Link>
+                            <Link v-if="can('users_view')" href="/users">Usuários</Link>
+                            <Link v-else :href="`/users/${currentUser.id}`">Meu usuário</Link>
                         </li>
                     </ul>
                     <ul class="list-group list-group-flush mt-4">
