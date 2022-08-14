@@ -17,7 +17,7 @@
                         <li v-if="can('acl_permissions_view')" class="list-group-item bg-transparent">
                             <Link href="/permissions">Permissões</Link>
                         </li>
-                        <li class="list-group-item bg-transparent">
+                        <li v-if="can('acl_roles_view')" class="list-group-item bg-transparent">
                             <Link href="/roles">Perfis</Link>
                         </li>
                         <li class="list-group-item bg-transparent">

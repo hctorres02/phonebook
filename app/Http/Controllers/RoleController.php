@@ -9,9 +9,16 @@ use App\Models\Acl\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class);
+    }
+
     public function index()
     {
-        $roles = Role::query()->paginate();
+        $roles = Role::query()->when(!auth()->user()->is_admin, function ($query) {
+            return $query->where('is_admin', false);
+        })->paginate();
 
         return inertia('Acl/Roles/Index', compact('roles'));
     }

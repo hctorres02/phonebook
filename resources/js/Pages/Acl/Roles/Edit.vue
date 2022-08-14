@@ -1,7 +1,11 @@
 <template>
     <auth-layout title="Editar perfil">
         <template #buttons>
-            <LinkDestroy v-if="!role.is_admin" :href="`/roles/${role.id}`" label="Excluír perfil" />
+            <LinkDestroy
+                v-if="can('roles_destroy') && !role.is_admin"
+                :href="`/roles/${role.id}`"
+                label="Excluír perfil"
+            />
         </template>
         <role-form
             method="put"

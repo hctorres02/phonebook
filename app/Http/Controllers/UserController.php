@@ -16,8 +16,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $currentUser = auth()->user();
-        $query = User::query()->with('role')->when(!$currentUser->is_admin, function ($query) {
+        $query = User::query()->with('role')->when(!auth()->user()->is_admin, function ($query) {
             $query->whereHas('role', function ($role) {
                 return $role->where('is_admin', false);
             });
