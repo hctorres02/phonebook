@@ -7,6 +7,11 @@ use App\Models\Acl\Permission;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Permission::class);
+    }
+
     public function index()
     {
         $permissions = Permission::query()->paginate();

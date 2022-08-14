@@ -1,7 +1,11 @@
 <template>
     <auth-layout title="Editar permissão">
         <template #buttons>
-            <LinkDestroy :href="`/permissions/${permission.id}`" label="Excluír permissão" />
+            <LinkDestroy
+                v-if="can('can_perrmissions_destroy')"
+                :href="`/permissions/${permission.id}`"
+                label="Excluír permissão"
+            />
         </template>
         <permission-form
             method="put"

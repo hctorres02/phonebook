@@ -14,7 +14,7 @@
             <div class="row">
                 <aside class="col-3">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-transparent">
+                        <li v-if="can('acl_permissions_view')" class="list-group-item bg-transparent">
                             <Link href="/permissions">Permissões</Link>
                         </li>
                         <li class="list-group-item bg-transparent">

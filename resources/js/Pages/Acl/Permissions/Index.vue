@@ -1,7 +1,11 @@
 <template>
     <auth-layout title="Permissões">
         <template #buttons>
-            <Link href="/permissions/create" class="btn btn-primary">
+            <Link
+                v-if="can('acl_permissions_create')"
+                href="/permissions/create"
+                class="btn btn-primary"
+            >
                 <i class="bi bi-person-badge"></i>
                 Cadastrar permissão
             </Link>
@@ -16,7 +20,11 @@
             <tr v-for="permission in permissions.data" :key="permission.id">
                 <td>{{ permission.id }}</td>
                 <td>
-                    <Link :href="`/permissions/${permission.id}/edit`">{{ permission.name }}</Link>
+                    <Link
+                        v-if="can('acl_permissions_update')"
+                        :href="`/permissions/${permission.id}/edit`"
+                    >{{ permission.name }}</Link>
+                    <span v-else>{{ permission.name }}</span>
                     <small v-if="!permission.enabled" class="badge badge-pill badge-danger">inativo</small>
                     <span class="d-block text-muted">{{ permission.description }}</span>
                 </td>
