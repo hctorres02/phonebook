@@ -1,7 +1,11 @@
 <template>
     <auth-layout title="Editar cliente" :back-to="`/customers/${customer.id}`">
         <template #buttons>
-            <LinkDestroy :href="`/customers/${customer.id}`" label="Excluír cliente" />
+            <LinkDestroy
+                v-if="can('customers_destroy')"
+                :href="`/customers/${customer.id}`"
+                label="Excluír cliente"
+            />
         </template>
         <customer-form
             method="put"

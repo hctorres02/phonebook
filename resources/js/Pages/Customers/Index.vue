@@ -1,7 +1,7 @@
 <template>
     <auth-layout title="Clientes">
         <template #buttons>
-            <Link href="/customers/create" class="btn btn-primary">
+            <Link v-if="can('customers_create')" href="/customers/create" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i>
                 Cadastrar cliente
             </Link>

@@ -1,11 +1,19 @@
 <template>
     <auth-layout :title="customer.name" back-to="/customers">
         <template #buttons>
-            <Link :href="`/customers/${customer.id}/edit`" class="btn btn-primary">
+            <Link
+                v-if="can('customers_update')"
+                :href="`/customers/${customer.id}/edit`"
+                class="btn btn-primary"
+            >
                 <i class="bi bi-pencil"></i>
                 Editar cliente
             </Link>
-            <LinkDestroy :href="`/customers/${customer.id}`" label="Excluír cliente" />
+            <LinkDestroy
+                v-if="can('customers_destroy')"
+                :href="`/customers/${customer.id}`"
+                label="Excluír cliente"
+            />
         </template>
         <div class="form-row">
             <div class="col-md-3 font-weight-bold">Status</div>

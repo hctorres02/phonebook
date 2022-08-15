@@ -8,6 +8,11 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Customer::class);
+    }
+
     public function index()
     {
         $user = auth()->user();
@@ -57,13 +62,6 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer)
     {
-        $customer->loadCount('numbers');
-        $hasRelations = array_filter($customer->only('numbers_count'));
-
-        if ($hasRelations) {
-            return redirect()->route('customers.show', $customer)->with('error', 'Não é possível excluir cliente associados a números!');
-        }
-
         $customer->delete();
 
         return redirect()->route('customers.index')->with('succes', 'Cliente excluído');

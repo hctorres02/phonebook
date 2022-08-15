@@ -26,7 +26,7 @@
                         </li>
                     </ul>
                     <ul class="list-group list-group-flush mt-4">
-                        <li class="list-group-item bg-transparent">
+                        <li v-if="can('customers_view')" class="list-group-item bg-transparent">
                             <Link href="/customers">Clientes</Link>
                         </li>
                         <li class="list-group-item bg-transparent">
