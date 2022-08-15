@@ -74,6 +74,6 @@ class User extends Authenticatable
 
     public function getPermissionsAttribute(): array
     {
-        return $this->role->permissions()->pluck('name')->all();
+        return $this->role->permissions()->where('enabled', true)->pluck('name')->all();
     }
 }

@@ -1,7 +1,11 @@
 <template>
     <auth-layout title="Editar número" :back-to="`/numbers/${number.id}`">
         <template #buttons>
-            <LinkDestroy :href="`/numbers/${number.id}`" label="Excluír número" />
+            <LinkDestroy
+                v-if="can('numbers_destroy')"
+                :href="`/numbers/${number.id}`"
+                label="Excluír número"
+            />
         </template>
         <number-form
             :action="`/numbers/${number.id}`"

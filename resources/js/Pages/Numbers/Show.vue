@@ -1,11 +1,19 @@
 <template>
     <auth-layout :title="`${number.number}`">
         <template #buttons>
-            <Link :href="`/numbers/${number.id}/edit`" class="btn btn-primary">
+            <Link
+                v-if="can('numbers_update')"
+                :href="`/numbers/${number.id}/edit`"
+                class="btn btn-primary"
+            >
                 <i class="bi bi-pencil"></i>
                 Editar número
             </Link>
-            <LinkDestroy :href="`/numbers/${number.id}`" label="Excluír número" />
+            <LinkDestroy
+                v-if="can('numbers_destroy')"
+                :href="`/numbers/${number.id}`"
+                label="Excluír número"
+            />
         </template>
         <div class="form-row">
             <div class="col-md-3 col font-weight-bold">Cliente</div>

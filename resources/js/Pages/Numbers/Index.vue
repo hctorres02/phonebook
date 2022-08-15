@@ -1,7 +1,7 @@
 <template>
     <auth-layout title="Catálogo telefônico">
         <template #buttons>
-            <Link href="/numbers/create" class="btn btn-primary">
+            <Link v-if="can('numbers_create')" href="/numbers/create" class="btn btn-primary">
                 <i class="bi bi-journal-plus"></i>
                 Cadastrar número
             </Link>

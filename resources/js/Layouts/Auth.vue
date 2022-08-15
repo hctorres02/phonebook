@@ -29,7 +29,7 @@
                         <li v-if="can('customers_view')" class="list-group-item bg-transparent">
                             <Link href="/customers">Clientes</Link>
                         </li>
-                        <li class="list-group-item bg-transparent">
+                        <li v-if="can('numbers_view')" class="list-group-item bg-transparent">
                             <Link href="/numbers">Catálogo telefônico</Link>
                         </li>
                     </ul>

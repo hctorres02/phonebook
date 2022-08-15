@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class NumberController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Number::class);
+    }
+
     public function index()
     {
         $numbers = Number::query()->with('customer')->paginate();
